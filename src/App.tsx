@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import Movie from "./pages/Movie";
+import Movie from "./pages/Movie/Movie";
 import Showtime from "./pages/Showtime";
 import ProductAndService from "./pages/ProductAndService";
 import Customer from "./pages/Customer";
@@ -11,6 +11,11 @@ import Event from "./pages/Event";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { LoginProvider } from "./contexts/LoginContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import AddMovie from "./pages/Movie/AddMovie";
+import EditMovie from "./pages/Movie/EditMovie";
+import DetailMovie from "./pages/Movie/DetailMovie";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +33,18 @@ const router = createBrowserRouter([
       {
         path: "movie",
         element: <Movie />,
+      },
+      {
+        path: "movie/add",
+        element: <AddMovie />,
+      },
+      {
+        path: "movie/edit/:id",
+        element: <EditMovie />,
+      },
+      {
+        path: "movie/detail/:id",
+        element: <DetailMovie />,
       },
       {
         path: "showtime",
@@ -61,13 +78,18 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <div className="bg-slate-800 w-full min-w-[1300px]">
       <div className="w-[1300px] mx-auto rounded-2xl overflow-hidden">
         <LoginProvider>
-          <RouterProvider router={router} />
-          <Toaster position="bottom-right" />
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+            <Toaster position="top-center" />
+          </QueryClientProvider>
         </LoginProvider>
       </div>
     </div>
