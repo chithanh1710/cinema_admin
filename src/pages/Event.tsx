@@ -1,9 +1,9 @@
 import { CirclePlus, Clipboard, ClipboardCheck, Edit } from "lucide-react";
 import ButtonUtils from "../components/Button/ButtonUtils";
-import Search from "../components/Search";
+import Search from "../components/Shared/Search.tsx";
 import ButtonPrintFileExcel from "../components/Button/ButtonPrintFileExcel";
 import toast from "react-hot-toast";
-import MainContentGrid from "../components/MainContentGrid";
+import MainContentGrid from "../components/Shared/MainContentGrid.tsx";
 import { useMemo, useState } from "react";
 import formatDate from "../utils/formatDate";
 

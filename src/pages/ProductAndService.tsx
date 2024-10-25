@@ -1,7 +1,7 @@
 import { CirclePlus, Edit, Trash2 } from "lucide-react";
 import ButtonUtils from "../components/Button/ButtonUtils";
-import Search from "../components/Search";
-import Filter from "../components/Filter";
+import Search from "../components/Shared/Search.tsx";
+import Filter from "../components/Shared/Filter.tsx";
 import { useState } from "react";
 import Show from "../components/Show/Show";
 import ShowAddOrEditProduct from "../components/Show/ShowAddOrEditProduct";

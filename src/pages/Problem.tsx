@@ -1,7 +1,7 @@
 import { CirclePlus, Edit } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Filter from "../components/Filter";
+import Filter from "../components/Shared/Filter.tsx";
 import formatDate from "../utils/formatDate";
 import ShowDetailProblem from "../components/Show/ShowDetailProblem";
 import ShowEditProblem from "../components/Show/ShowEditProblem";

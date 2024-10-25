@@ -8,11 +8,11 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import removeAccents from "../utils/removeAccents";
-import Search from "../components/Search";
+import Search from "../components/Shared/Search.tsx";
 import { useSearchParams } from "react-router-dom";
 import ButtonPrintFileExcel from "../components/Button/ButtonPrintFileExcel";
 import ButtonUtils from "../components/Button/ButtonUtils";
-import MainContentGrid from "../components/MainContentGrid";
+import MainContentGrid from "../components/Shared/MainContentGrid.tsx";
 
 export default function Employee() {
   const [searchParam] = useSearchParams();
