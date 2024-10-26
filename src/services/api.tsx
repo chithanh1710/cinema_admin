@@ -7,6 +7,26 @@ import { RootShowtime } from "../types/Showtime.ts";
 
 const URL_API = import.meta.env.VITE_API_URL;
 
+export async function getAllScreenRoom(){
+	try {
+		const res = await fetch(`${URL_API}/screenRooms`);
+
+		if (!res.ok) throw new Error(`Error: ${res.status} ${res.statusText}`);
+
+		const data = await res.json();
+
+		return data;
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to fetch movies:", error.message);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
 export async function getMovieById(id: number): Promise<RootMovieID> {
 	try {
 		await new Promise((res) => setTimeout(() => res(""), 500));

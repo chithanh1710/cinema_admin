@@ -89,3 +89,8 @@ export const handleImageUpload = async (file: File) => {
   const data = await response.json();
   return data.url;
 };
+
+export async function addShowtime(values:any){
+  // TODO: THEM API SUAT CHIEU ROI MOI THEM SUAT CHIEU
+  console.log(values);
+}

@@ -2,6 +2,9 @@
 import { Button, DatePicker, Form, Select, Typography } from "antd";
 import { useWatch } from "antd/es/form/Form";
 import moment from "moment";
+import { useMutation, useQueries } from "@tanstack/react-query";
+import { addShowtime } from "../../services/actions.tsx";
+import { getAllMovie, getAllScreenRoom } from "../../services/api.tsx";
 
 const config = {
 	rules: [{ type: "object" as const, required: true, message: "Please select time!" }],
@@ -21,9 +24,35 @@ const showtimes = [
 ];
 
 export default function AddShowtime() {
-	// TODO: MAI LAM TIEP O DAY
+	const result = useQueries({
+		queries:[
+			{
+				queryKey:["movie"],
+				queryFn:()=>getAllMovie(1,100,"")
+			},
+			{
+				queryKey:["srceenRoom"],
+				queryFn:getAllScreenRoom
+			}
+		]
+	});
+
+	const [moviesAPI,screenRoomAPI] = result;
+
+	const {data:dataMovie,isError:isErrorMovie,isFetching:isFetchingMovie} = moviesAPI;
+	const {data:dataScreenRoom,isError:isErrorScreenRoomAPI,isFetching:isFetchingScreenRoomAPI} = screenRoomAPI;
+
+	const {mutate} = useMutation({
+		mutationFn:addShowtime,
+	})
 	const onFinish = async (values: any) => {
-		console.log(values);
+		const data =
+			{
+				id_movie: values.id_movie,
+				id_screen_room: values.id_screen_room,
+				time_start: values.time_start?.format("DD-MM-YYYY HH:mm:ss")
+			}
+		mutate(data);
 	};
 
 	const [form] = Form.useForm();
@@ -70,6 +99,10 @@ export default function AddShowtime() {
 		};
 	};
 
+	if(isErrorMovie && isErrorScreenRoomAPI) return <p>Error</p>
+
+	const listMovie = dataMovie?.data || [];
+	const listScreenRoom = dataScreenRoom || [];
 	return (
 		<main>
 			<h2 className="text-xl font-semibold text-center mb-2">Thêm phim mới</h2>
@@ -85,7 +118,9 @@ export default function AddShowtime() {
 					<Form.Item label="Phim" name="id_movie"
 					           rules={[{ required: true, message: "Vui lòng chọn phim!" }]}>
 						<Select>
-							<Select.Option value="demo">Demo</Select.Option>
+							{listMovie.map(m=>
+							<Select.Option key={m.id} value={m.id}>{m.name}</Select.Option>
+							)}
 						</Select>
 					</Form.Item>
 					<Form.Item label="Phòng chiếu" name="id_screen_room" rules={[{
@@ -93,7 +128,9 @@ export default function AddShowtime() {
 							" chiếu!"
 					}]}>
 						<Select>
-							<Select.Option value="demo">Demo</Select.Option>
+							{listScreenRoom.map(s=>
+								<Select.Option key={s} value={s}>{s}</Select.Option>
+							)}
 						</Select>
 					</Form.Item>
 					<Form.Item name="time_start" label="Chọn ngày giờ" {...config}>
@@ -119,7 +156,7 @@ export default function AddShowtime() {
 				<Typography className="w-full">
 					<pre>Phim: {movieValue}</pre>
 					<pre>Phòng: {screenRoomValue}</pre>
-					<pre>Giờ bắt đầu: {timeStartValue?.format("HH:mm:ss")}</pre>
+					<pre>Giờ bắt đầu: {timeStartValue?.format("DD-MM-YYYY HH:mm:ss")}</pre>
 				</Typography>
 			</div>
 		</main>

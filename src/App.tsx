@@ -16,8 +16,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AddMovie from "./pages/Movie/AddMovie";
 import EditMovie from "./pages/Movie/EditMovie";
 import DetailMovie from "./pages/Movie/DetailMovie";
-import EditShowtime from "./pages/Showtime/EditShowtime.tsx";
 import AddShowtime from "./pages/Showtime/AddShowtime.tsx";
+import EditShowtime from "./pages/Showtime/EditShowtime.tsx";
 
 const router = createBrowserRouter([
 	{
