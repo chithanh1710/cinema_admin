@@ -1,29 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQueries } from "@tanstack/react-query";
-import {
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Rate,
-  Select,
-  TimePicker,
-  Upload,
-  Typography,
-  Button,
-  DatePicker,
-} from "antd";
+import { Button, DatePicker, Form, Input, InputNumber, Radio, Rate, Select, TimePicker, Typography, Upload, } from "antd";
 import { useWatch } from "antd/es/form/Form";
 import TextArea from "antd/es/input/TextArea";
 import { addMovie, handleImageUpload } from "../../services/actions";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import {
-  getAllActors,
-  getAllDirectors,
-  getAllGenres,
-} from "../../services/api";
+import { getAllActors, getAllDirectors, getAllGenres, } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const normFile = (e: any) => {
   if (Array.isArray(e)) {
@@ -43,6 +28,7 @@ const config = {
 };
 
 export const FormAddMovie = () => {
+  const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const results = useQueries({
@@ -100,11 +86,12 @@ export const FormAddMovie = () => {
     onMutate: () => {
       toast.loading("Đang thực hiện thêm phim mới", { id: "addMovie" });
     },
-    onSuccess: () => {
+    onSuccess: (movie) => {
       toast.success("Thêm phim thành công");
       form.resetFields();
       setImageUrl("");
       setThumbnailUrl("");
+      navigate(`/dashboard/movie/detail/${movie.movieId}`);
     },
     onError: (error) => {
       toast.error(`Thêm phim thất bại: ${error.message}`);
@@ -404,7 +391,7 @@ export const FormAddMovie = () => {
         <pre>Nội dung: {descriptionValue}</pre>
         <pre>Trạng thái: {typeValue}</pre>
         <pre>Video trailer URL: {trailerValue}</pre>
-        <pre>Ngày xuất bản: {release_dateValue?.format("dd:MM:yyyy")} </pre>
+        <pre>Ngày xuất bản: {release_dateValue?.format("DD-MM-YYYY")} </pre>
         <pre>Thời gian: {durationValue?.format("HH:mm")} </pre>
         <pre>Tuổi: {ageValue}</pre>
         <pre>Đánh giá: {rateValue}</pre>

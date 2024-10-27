@@ -4,62 +4,79 @@ import { useWatch } from "antd/es/form/Form";
 import moment from "moment";
 import { useMutation, useQueries } from "@tanstack/react-query";
 import { addShowtime } from "../../services/actions.tsx";
-import { getAllMovie, getAllScreenRoom } from "../../services/api.tsx";
+import { getAllCinemas, getAllMovie, getAllShowTimes } from "../../services/api.tsx";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const config = {
 	rules: [{ type: "object" as const, required: true, message: "Please select time!" }],
 };
 
-const showtimes = [
-	{
-		id: 1,
-		time_start: "2024-10-26T06:15:00",
-		time_end: "2024-10-26T08:15:00"
-	},
-	{
-		id: 2,
-		time_start: "2024-10-26T06:30:00",
-		time_end: "2024-10-26T08:40:00"
-	},
-];
-
 export default function AddShowtime() {
+	const navigate = useNavigate();
 	const result = useQueries({
-		queries:[
+		queries: [
 			{
-				queryKey:["movie"],
-				queryFn:()=>getAllMovie(1,100,"")
+				queryKey: ["movie"],
+				queryFn: () => getAllMovie(1, 100, "")
 			},
 			{
-				queryKey:["srceenRoom"],
-				queryFn:getAllScreenRoom
+				queryKey: ["srceenRoom"],
+				queryFn: getAllCinemas
+			},
+			{
+				queryKey: ["showtime"],
+				queryFn: getAllShowTimes
 			}
 		]
 	});
 
-	const [moviesAPI,screenRoomAPI] = result;
+	const [moviesAPI, screenRoomAPI, showTimeAPI] = result;
+	const { data: dataMovie, isError: isErrorMovie, isFetching: isFetchingMovie } = moviesAPI;
+	const {
+		data: dataScreenRoom,
+		isError: isErrorScreenRoomAPI,
+		isFetching: isFetchingScreenRoomAPI
+	} = screenRoomAPI;
+	const {
+		data: dataShowTime,
+		isError: isErrorShowTimeAPI,
+		isFetching: isFetchingShowTimeAPI
+	} = showTimeAPI;
 
-	const {data:dataMovie,isError:isErrorMovie,isFetching:isFetchingMovie} = moviesAPI;
-	const {data:dataScreenRoom,isError:isErrorScreenRoomAPI,isFetching:isFetchingScreenRoomAPI} = screenRoomAPI;
+	const { mutate } = useMutation({
+		mutationFn: addShowtime,
+		onError: (error) => {
+			toast.error(`Thêm thất bại! ${error.message}`);
+		},
+		onSuccess: () => {
+			form.resetFields();
+			navigate("/dashboard/showtime");
+			toast.success("Thêm thành công");
+		},
+		onMutate: () => {
+			toast.loading("Đang thực hiện", {
+				id: "addShowTime"
+			});
+		},
+		onSettled: () => {
+			toast.remove("addShowTime");
+		}
+	});
 
-	const {mutate} = useMutation({
-		mutationFn:addShowtime,
-	})
 	const onFinish = async (values: any) => {
 		const data =
 			{
 				id_movie: values.id_movie,
 				id_screen_room: values.id_screen_room,
-				time_start: values.time_start?.format("DD-MM-YYYY HH:mm:ss")
-			}
+				time_start: values.time_start.format("YYYY-MM-DD HH:mm:ss")
+			};
 		mutate(data);
 	};
-
 	const [form] = Form.useForm();
 	const movieValue = useWatch("id_movie", form);
 	const screenRoomValue = useWatch("id_screen_room", form);
 	const timeStartValue = useWatch("time_start", form);
-
 	const disabledTime = (current: any) => {
 		const disabledHours: any[] = [];
 		const disabledMinutes: any[] = [];
@@ -70,27 +87,31 @@ export default function AddShowtime() {
 			Array.from({ length: now.minute() }, (_, i) => disabledMinutes.push(i));
 		}
 
-		showtimes.forEach(showtime => {
-			const start = moment(showtime.time_start);
-			const end = moment(showtime.time_end);
-			// Kiểm tra nếu ngày được chọn là ngày có showtime
-			if (current.isSame(start, "day")) {
-				// Disable hours within the time range
-				for (let hour = start.hour() ; hour < end.hour() ; hour++) {
-					disabledHours.push(hour);
-				}
+		dataShowTime?.data.filter((st) => (screenRoomValue
+		                                   ? st.screen_room.id === Number(screenRoomValue)
+		                                   : true))
+		            .forEach(showtime => {
+			            const start = moment(showtime.time_start);
+			            const end = moment(showtime.time_end);
+			            // Kiểm tra nếu ngày được chọn là ngày có showtime
+			            if (current.isSame(start, "day")) {
+				            // Disable hours within the time range
+				            for (let hour = start.hour() ; hour < end.hour() ; hour++) {
+					            disabledHours.push(hour);
+				            }
 
-				if (current.isSame(end, "day") && current.isSame(end, "hour")) {
-					const totalTime = end.minute() + 30;
-					if (totalTime >= 60) {
-						disabledHours.push(end.hour());
-						Array.from({ length: 60 }, (_, i) => disabledMinutes.push(i));
-					} else {
-						Array.from({ length: totalTime }, (_, i) => disabledMinutes.push(i));
-					}
-				}
-			}
-		});
+				            if (current.isSame(end, "day") && current.isSame(end, "hour")) {
+					            const totalTime = end.minute() + 30;
+					            if (totalTime >= 60) {
+						            disabledHours.push(end.hour());
+						            Array.from({ length: 60 }, (_, i) => disabledMinutes.push(i));
+					            } else {
+						            Array.from({ length: totalTime }, (
+							            _, i) => disabledMinutes.push(i));
+					            }
+				            }
+			            }
+		            });
 
 
 		return {
@@ -99,7 +120,7 @@ export default function AddShowtime() {
 		};
 	};
 
-	if(isErrorMovie && isErrorScreenRoomAPI) return <p>Error</p>
+	if (isErrorMovie && isErrorScreenRoomAPI && isErrorShowTimeAPI) return <p>Error</p>;
 
 	const listMovie = dataMovie?.data || [];
 	const listScreenRoom = dataScreenRoom || [];
@@ -117,24 +138,27 @@ export default function AddShowtime() {
 				>
 					<Form.Item label="Phim" name="id_movie"
 					           rules={[{ required: true, message: "Vui lòng chọn phim!" }]}>
-						<Select>
-							{listMovie.map(m=>
-							<Select.Option key={m.id} value={m.id}>{m.name}</Select.Option>
+						<Select placeholder="Chọn phim">
+							{!isFetchingMovie && listMovie.map(m =>
+								<Select.Option key={m.id} value={m.id}>{m.name}</Select.Option>
 							)}
 						</Select>
 					</Form.Item>
-					<Form.Item label="Phòng chiếu" name="id_screen_room" rules={[{
-						required: true, message: "Vui lòng chọn phòng" +
-							" chiếu!"
-					}]}>
-						<Select>
-							{listScreenRoom.map(s=>
-								<Select.Option key={s} value={s}>{s}</Select.Option>
-							)}
+					<Form.Item label="Phòng chiếu" name="id_screen_room" rules={[
+						{
+							required: true, message: "Vui lòng chọn phòng" +
+								" chiếu!"
+						}
+					]}>
+						<Select placeholder="Chọn phòng chiếu">
+							{!isFetchingScreenRoomAPI && listScreenRoom.map(sr => sr.screenRooms.map(s =>
+								<Select.Option key={s.id} value={s.id}>{sr.cinema}:
+									Phòng {s.name}</Select.Option>))}
 						</Select>
 					</Form.Item>
 					<Form.Item name="time_start" label="Chọn ngày giờ" {...config}>
-						<DatePicker showTime format="YYYY-MM-DD HH:mm:ss"
+						<DatePicker disabled={isFetchingShowTimeAPI} showTime
+						            format="YYYY-MM-DD HH:mm:ss"
 						            disabledDate={(current) => {
 							            // Disable dates before today
 							            return current && current < moment()

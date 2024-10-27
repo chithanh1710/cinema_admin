@@ -11,7 +11,6 @@ export default function Login() {
     errorPassword,
     errorUsername,
   } = useLogin();
-  console.log(isAuthenticated);
 
   if (isAuthenticated) return <Navigate to="/dashboard" replace={false} />;
   else

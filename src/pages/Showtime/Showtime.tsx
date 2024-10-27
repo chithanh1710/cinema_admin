@@ -55,7 +55,9 @@ export default function Showtime() {
 
 	const uniqueScreenRooms = [...new Set(listShowtime?.map((item) => item.screen_room.name))];
 
-	const listShowtimeFilter = listShowtime?.filter((l) => (filterScreenRoom.length === 0 ? true : filterScreenRoom.some(name => name === l.screen_room.name))
+	const listShowtimeFilter = listShowtime?.filter((l) => (filterScreenRoom.length === 0
+	                                                        ? true
+	                                                        : filterScreenRoom.some(name => name === l.screen_room.name))
 		&& (filterMovie.length === 0 ? true : filterMovie.some(id => id === l.movie.id))
 		&& (search ? l.id.toString()
 		              .includes(search) : true));
@@ -140,7 +142,9 @@ export default function Showtime() {
 				</div>
 				<p className="font-light">
 					Tổng số lượng sản phẩm:{" "}
-					<span className="font-bold">{!isFetching ? listShowtimeFilter?.length : 0}</span>
+					<span className="font-bold">{!isFetching
+					                             ? listShowtimeFilter?.length
+					                             : 0}</span>
 				</p>
 			</div>
 
@@ -155,6 +159,7 @@ export default function Showtime() {
 					pageSize: pageSize,
 					current: currentPage,
 					total: listShowtimeFilter?.length,
+					showSizeChanger: false
 				}}
 				onChange={handleTableChange}
 			/>
