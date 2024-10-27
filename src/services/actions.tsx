@@ -132,3 +132,49 @@ export async function editShowtime(values: any, showtimeId: number) {
 		}
 	}
 }
+
+export async function editCustomer(values: any, customerId: number) {
+	try {
+		const res = await fetch(`${URL_API}/customers/${customerId}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(values)
+		});
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to edit customer:", error);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+export async function editEmployee(values: any, id: number) {
+	try {
+		const res = await fetch(`${URL_API}/staffs/${id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(values)
+		});
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to edit customer:", error);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}

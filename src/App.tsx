@@ -3,8 +3,8 @@ import Dashboard from "./pages/Dashboard";
 import Movie from "./pages/Movie/Movie";
 import Showtime from "./pages/Showtime/Showtime.tsx";
 import ProductAndService from "./pages/ProductAndService";
-import Customer from "./pages/Customer";
-import Employee from "./pages/Employee";
+import Customer from "./pages/Customer/Customer.tsx";
+import Employee from "./pages/Employee/Employee.tsx";
 import { Toaster } from "react-hot-toast";
 import Problem from "./pages/Problem";
 import Event from "./pages/Event";
@@ -18,6 +18,10 @@ import EditMovie from "./pages/Movie/EditMovie";
 import DetailMovie from "./pages/Movie/DetailMovie";
 import AddShowtime from "./pages/Showtime/AddShowtime.tsx";
 import EditShowtime from "./pages/Showtime/EditShowtime.tsx";
+import EditCustomer from "./pages/Customer/EditCustomer.tsx";
+import DetailCustomer from "./pages/Customer/DetailCustomer.tsx";
+import EditEmployee from "./pages/Employee/EditEmployee.tsx";
+import Analysis from "./pages/Analysis.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -32,6 +36,10 @@ const router = createBrowserRouter([
 			</PrivateRoute>
 		),
 		children: [
+			{
+				path: "analysis",
+				element: <Analysis/>,
+			},
 			{
 				path: "movie",
 				element: <Movie/>,
@@ -63,10 +71,20 @@ const router = createBrowserRouter([
 			{
 				path: "employee",
 				element: <Employee/>,
+			}, {
+				path: "employee/edit/:id",
+				element: <EditEmployee/>,
 			},
 			{
 				path: "customer",
 				element: <Customer/>,
+			},
+			{
+				path: "customer/edit/:id",
+				element: <EditCustomer/>,
+			}, {
+				path: "customer/detail/:id",
+				element: <DetailCustomer/>,
 			},
 			{
 				path: "product-and-service",

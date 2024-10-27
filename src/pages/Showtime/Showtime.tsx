@@ -127,7 +127,7 @@ export default function Showtime() {
 			),
 			dataIndex: "id",
 			render: (id) => (<Link to={`/dashboard/showtime/edit/${id}`}>
-				<Button variant="solid" color="primary" className="w-full">
+				<Button type="link" className="w-full">
 					Sửa
 				</Button>
 			</Link>)

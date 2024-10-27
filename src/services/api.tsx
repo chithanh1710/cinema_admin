@@ -5,6 +5,9 @@ import { RootMovie } from "../types/Movie";
 import { RootMovieID } from "../types/MovieID";
 import { RootShowtime } from "../types/Showtime.ts";
 import { RootCinemas, SreenRoom } from "../types/Cinemas.ts";
+import { RootCustomer } from "../types/Customer.ts";
+import { RootOneCustomer } from "../types/OneCustomer.ts";
+import { RootStaff } from "../types/Staff.ts";
 
 const URL_API = import.meta.env.VITE_API_URL;
 
@@ -153,6 +156,82 @@ export async function getAllShowTimes(): Promise<RootShowtime> {
 	} catch (error: unknown) {
 		if (error instanceof Error) {
 			console.error("Failed to fetch movies:", error.message);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+export async function getAllCustomer() {
+	try {
+		const res = await fetch(`${URL_API}/customers`);
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+		const data: RootCustomer = await res.json();
+		return data;
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to fetch customers:", error.message);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+export async function getCustomerById(id: number) {
+	try {
+		const res = await fetch(`${URL_API}/customers/${id}`);
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+		const data: RootOneCustomer = await res.json();
+		return data;
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to fetch customers:", error.message);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+export async function getAllStaffs() {
+	try {
+		const res = await fetch(`${URL_API}/staffs`);
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+		const data: RootStaff = await res.json();
+		return data;
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to fetch customers:", error.message);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+export async function getStaffById(id: number) {
+	try {
+		const res = await fetch(`${URL_API}/staffs/${id}`);
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+		const data: RootStaff = await res.json();
+		return data;
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to fetch customers:", error.message);
 			throw error;
 		} else {
 			console.error("Unknown error occurred");

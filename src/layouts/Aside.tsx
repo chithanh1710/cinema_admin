@@ -1,19 +1,10 @@
-import {
-  ArrowLeftToLine,
-  CalendarClock,
-  CircleUserRound,
-  Film,
-  Popcorn,
-  ServerCrash,
-  Ticket,
-  UserRound,
-  UsersRound,
-} from "lucide-react";
+import { ArrowLeftToLine, CalendarClock, CircleUserRound, Film, HomeIcon, Popcorn, ServerCrash, Ticket, UserRound, UsersRound, } from "lucide-react";
 import { ReactNode } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Aside() {
   const dataAside: { icon: ReactNode; to: string; name: string }[] = [
+    { icon: <HomeIcon className="size-5"/>, to: "analysis", name: "Trang chủ" },
     { icon: <Film className="size-5" />, to: "movie", name: "Quản lý phim" },
     {
       icon: <CalendarClock className="size-5" />,
