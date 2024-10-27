@@ -13,7 +13,12 @@ const URL_API = import.meta.env.VITE_API_URL;
 
 export async function getAllCinemas(): Promise<{ cinema: string; screenRooms: SreenRoom[]; }[]> {
 	try {
-		const res = await fetch(`${URL_API}/cinemas`);
+		const res = await fetch(`${URL_API}/cinemas`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 
 		if (!res.ok) throw new Error(`Error: ${res.status} ${res.statusText}`);
 
@@ -33,8 +38,12 @@ export async function getAllCinemas(): Promise<{ cinema: string; screenRooms: Sr
 
 export async function getMovieById(id: number): Promise<RootMovieID> {
 	try {
-		await new Promise((res) => setTimeout(() => res(""), 500));
-		const res = await fetch(`${URL_API}/movies/${id}`);
+		const res = await fetch(`${URL_API}/movies/${id}`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -59,10 +68,14 @@ export async function getAllMovie(
 	search: string
 ): Promise<RootMovie> {
 	try {
-		await new Promise((res) => setTimeout(() => res(""), 500));
 		const filterSearch = search ? `&q=${search}` : "";
 		const res = await fetch(
-			`${URL_API}/movies?page=${page}&pageSize=${pageSize}${filterSearch}`
+			`${URL_API}/movies?page=${page}&pageSize=${pageSize}${filterSearch}`, {
+				method: "GET", // Hoặc POST tùy vào API của bạn
+				headers: {
+					"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+				}
+			}
 		);
 
 		if (!res.ok) {
@@ -84,7 +97,12 @@ export async function getAllMovie(
 
 export async function getAllGenres(): Promise<RootGenres> {
 	try {
-		const res = await fetch(`${URL_API}/genres?page=${1}&pageSize=${100}`);
+		const res = await fetch(`${URL_API}/genres?page=${1}&pageSize=${100}`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -105,7 +123,12 @@ export async function getAllGenres(): Promise<RootGenres> {
 
 export async function getAllActors(): Promise<RootActors> {
 	try {
-		const res = await fetch(`${URL_API}/actors?page=${1}&pageSize=${100}`);
+		const res = await fetch(`${URL_API}/actors?page=${1}&pageSize=${100}`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -126,7 +149,12 @@ export async function getAllActors(): Promise<RootActors> {
 
 export async function getAllDirectors(): Promise<RootDirectors> {
 	try {
-		const res = await fetch(`${URL_API}/actors?page=${1}&pageSize=${100}`);
+		const res = await fetch(`${URL_API}/actors?page=${1}&pageSize=${100}`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -147,7 +175,12 @@ export async function getAllDirectors(): Promise<RootDirectors> {
 
 export async function getAllShowTimes(): Promise<RootShowtime> {
 	try {
-		const res = await fetch(`${URL_API}/showtimes`);
+		const res = await fetch(`${URL_API}/showtimes`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
 		}
@@ -166,7 +199,12 @@ export async function getAllShowTimes(): Promise<RootShowtime> {
 
 export async function getAllCustomer() {
 	try {
-		const res = await fetch(`${URL_API}/customers`);
+		const res = await fetch(`${URL_API}/customers`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
 		}
@@ -185,7 +223,12 @@ export async function getAllCustomer() {
 
 export async function getCustomerById(id: number) {
 	try {
-		const res = await fetch(`${URL_API}/customers/${id}`);
+		const res = await fetch(`${URL_API}/customers/${id}`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
 		}
@@ -204,7 +247,12 @@ export async function getCustomerById(id: number) {
 
 export async function getAllStaffs() {
 	try {
-		const res = await fetch(`${URL_API}/staffs`);
+		const res = await fetch(`${URL_API}/staffs`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
 		}
@@ -223,7 +271,12 @@ export async function getAllStaffs() {
 
 export async function getStaffById(id: number) {
 	try {
-		const res = await fetch(`${URL_API}/staffs/${id}`);
+		const res = await fetch(`${URL_API}/staffs/${id}`, {
+			method: "GET", // Hoặc POST tùy vào API của bạn
+			headers: {
+				"ngrok-skip-browser-warning": "true" // Bất kỳ giá trị nào cũng được
+			}
+		});
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
 		}
