@@ -8,6 +8,7 @@ export default function ShowAddOrEditProduct({
   id?: string;
 }) {
   // TODO: FETCH DU LIEU TU ID DE CHINH SUA
+    console.log(id);
 
     const [category, setCategory] = useState("");
   const [img, setImg] = useState("");

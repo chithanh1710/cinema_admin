@@ -1,6 +1,7 @@
 import formatDate from "../../utils/formatDate";
 
 export default function ShowEditProblem({ id }: { id: string }) {
+  console.log(id);
   // TODO: LẤY ID DỮ FETCH DỮ LIỆU ĐỂ RENDER RA
   const valueEdit = {
     suCo: "123",
