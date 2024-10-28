@@ -16,6 +16,7 @@ export async function addMovie(movie: any) {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
 			},
 			body: JSON.stringify(movie),
 		});
@@ -51,6 +52,7 @@ export async function editMovie(movie: any, movieId: number) {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
 			},
 			body: JSON.stringify(movie),
 		});
@@ -92,7 +94,8 @@ export async function addShowtime(values: any) {
 		const res = await fetch(`${URL_API}/showtimes`, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
 			},
 			body: JSON.stringify(values)
 		});
@@ -115,7 +118,8 @@ export async function editShowtime(values: any, showtimeId: number) {
 		const res = await fetch(`${URL_API}/showtimes/${showtimeId}`, {
 			method: "PUT",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
 			},
 			body: JSON.stringify(values)
 		});
@@ -138,7 +142,8 @@ export async function editCustomer(values: any, customerId: number) {
 		const res = await fetch(`${URL_API}/customers/${customerId}`, {
 			method: "PUT",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
 			},
 			body: JSON.stringify(values)
 		});
@@ -161,7 +166,8 @@ export async function editEmployee(values: any, id: number) {
 		const res = await fetch(`${URL_API}/staffs/${id}`, {
 			method: "PUT",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
 			},
 			body: JSON.stringify(values)
 		});
