@@ -6,6 +6,7 @@ export default function ShowEditProblem({ id }: { id: string }) {
     suCo: "123",
     ngay: new Date(),
   };
+  console.log(id);
   return (
     <div className="flex flex-col p-4">
       <div className="flex gap-8">
