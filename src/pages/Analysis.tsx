@@ -5,6 +5,7 @@ import { formatMoney } from "@/utils/MoneyFormat.ts";
 import { Suspense } from "react";
 import ListTop5Customer from "@/components/Shared/ListTopCustomer.tsx";
 import { ChartSaleDate } from "@/components/Chart/ChartSaleDate.tsx";
+import Loading from "@/components/Shared/Loading";
 
 
 export default function Analysis() {
@@ -47,7 +48,7 @@ export default function Analysis() {
 		isError: isErrorDayFood
 	} = DayFoodApi;
 
-	if (isFetchingMonth || isFetchingDay || isFetchingDayTickets || isFetchingDayFood) return <p>Loading...</p>;
+	if (isFetchingMonth || isFetchingDay || isFetchingDayTickets || isFetchingDayFood) return <Loading/>;
 	if (isErrorMonth || isErrorDay || isErrorDayTickets || isErrorDayFood) return <p>Error fetching data</p>;
 	if (!DataMonth || !DataDay || !DataDayTickets || !DataDayFood) return <p>No data available</p>;
 	const { total_revenue: prevMonth } = DataMonth.data[0];

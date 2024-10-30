@@ -4,6 +4,7 @@ import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart
 import { useQuery } from "@tanstack/react-query";
 import { GetMonthlyRevenue } from "@/services/api.tsx";
 import { formatMoney } from "@/utils/MoneyFormat.ts";
+import Loading from "@/components/Shared/Loading";
 
 const chartConfig = {
 	month: {
@@ -37,7 +38,7 @@ export function ChartSales() {
 	});
 
 	if (isError) return <p>Error fetching data</p>;
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 
 	const chartData = data?.data || [];
 

@@ -20,7 +20,7 @@ function Dashboard() {
 			<Header/>
 			<Main>
 				<Aside/>
-				<section className="h-full overflow-y-auto py-4 mx-4">
+				<section className="h-full overflow-y-auto py-4 mx-4 relative">
 					<Outlet/>
 				</section>
 			</Main>

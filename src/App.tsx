@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { LoginProvider } from "./contexts/LoginContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import LoadingFullPage from "@/components/Shared/LoadingFullPage";
 
 // Sử dụng React.lazy để tải các component
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: (
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense fallback={<LoadingFullPage/>}>
 				<Login/>
 			</Suspense>
 		),
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
 	{
 		path: "/dashboard",
 		element: (
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense fallback={<LoadingFullPage/>}>
 				<PrivateRoute>
 					<Dashboard/>
 				</PrivateRoute>
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
 			{
 				path: "analysis",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<Analysis/>
 					</Suspense>
 				),
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
 			{
 				path: "movie",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<Movie/>
 					</Suspense>
 				),
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
 			{
 				path: "movie/add",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<AddMovie/>
 					</Suspense>
 				),
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
 			{
 				path: "movie/edit/:id",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<EditMovie/>
 					</Suspense>
 				),
@@ -80,7 +81,7 @@ const router = createBrowserRouter([
 			{
 				path: "movie/detail/:id",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<DetailMovie/>
 					</Suspense>
 				),
@@ -88,7 +89,7 @@ const router = createBrowserRouter([
 			{
 				path: "showtime",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<Showtime/>
 					</Suspense>
 				),
@@ -96,7 +97,7 @@ const router = createBrowserRouter([
 			{
 				path: "showtime/edit/:id",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<EditShowtime/>
 					</Suspense>
 				),
@@ -104,7 +105,7 @@ const router = createBrowserRouter([
 			{
 				path: "showtime/add",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<AddShowtime/>
 					</Suspense>
 				),
@@ -112,7 +113,7 @@ const router = createBrowserRouter([
 			{
 				path: "employee",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<Employee/>
 					</Suspense>
 				),
@@ -120,7 +121,7 @@ const router = createBrowserRouter([
 			{
 				path: "employee/edit/:id",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<EditEmployee/>
 					</Suspense>
 				),
@@ -128,7 +129,7 @@ const router = createBrowserRouter([
 			{
 				path: "customer",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<Customer/>
 					</Suspense>
 				),
@@ -136,7 +137,7 @@ const router = createBrowserRouter([
 			{
 				path: "customer/edit/:id",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<EditCustomer/>
 					</Suspense>
 				),
@@ -144,7 +145,7 @@ const router = createBrowserRouter([
 			{
 				path: "customer/detail/:id",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<DetailCustomer/>
 					</Suspense>
 				),
@@ -152,7 +153,7 @@ const router = createBrowserRouter([
 			{
 				path: "foods-and-drinks",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<FoodsAndDrinks/>
 					</Suspense>
 				),
@@ -160,7 +161,7 @@ const router = createBrowserRouter([
 			{
 				path: "information",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<FoodsAndDrinks/>
 					</Suspense>
 				),
@@ -168,7 +169,7 @@ const router = createBrowserRouter([
 			{
 				path: "problem",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<Problem/>
 					</Suspense>
 				),
@@ -176,7 +177,7 @@ const router = createBrowserRouter([
 			{
 				path: "event",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingFullPage/>}>
 						<Event/>
 					</Suspense>
 				),

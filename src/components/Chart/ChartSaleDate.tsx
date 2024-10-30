@@ -5,6 +5,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, } from 
 import { useQuery } from "@tanstack/react-query";
 import { Get3Month } from "@/services/api.tsx";
 import { formatMoney } from "@/utils/MoneyFormat.ts";
+import Loading from "@/components/Shared/Loading";
 
 const chartConfig = {} satisfies ChartConfig;
 
@@ -13,7 +14,7 @@ export function ChartSaleDate() {
 		queryKey: ["chart/transaction_date"],
 		queryFn: Get3Month
 	});
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 	if (isError) return <p>Error...</p>;
 	const chartData = data?.data.map((tmp: any) => ({
 		transaction_date: tmp.transaction_date,

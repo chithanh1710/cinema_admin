@@ -5,6 +5,7 @@ import { getCustomerById } from "../../services/api"; // Giả sử hàm này đ
 import { formatMoney } from "../../utils/MoneyFormat.ts";
 import Search from "../../components/Shared/Search.tsx";
 import { ColumnType } from "antd/es/table";
+import Loading from "@/components/Shared/Loading";
 
 const { Title } = Typography;
 
@@ -73,7 +74,7 @@ export default function DetailCustomer() {
 	];
 
 	if (!id) return <Navigate to="/dashboard/customer" replace/>;
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 	if (isError) return <p>Error</p>;
 
 	// Nhóm giao dịch theo ngày và tính tổng tiền cho mỗi ngày

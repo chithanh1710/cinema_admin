@@ -214,7 +214,7 @@ export const FormAddMovie = () => {
                     .includes(input.toLowerCase())
                 : false
             }
-            placeholder={directorsIsFetching ? "Loading..." : "Select options"}
+            placeholder={directorsIsFetching ? "LoadingFullPage..." : "Select options"}
           >
             {!directorsIsFetching ? (
               directorsData?.data.map((d) => (
@@ -249,7 +249,7 @@ export const FormAddMovie = () => {
                 : false
             }
             mode="multiple"
-            placeholder={actorsIsFetching ? "Loading..." : "Select options"}
+            placeholder={actorsIsFetching ? "LoadingFullPage..." : "Select options"}
           >
             {!actorsIsFetching ? (
               actorsData?.data.map((a) => (
@@ -284,7 +284,7 @@ export const FormAddMovie = () => {
                 : false
             }
             mode="multiple"
-            placeholder={genresIsFetching ? "Loading..." : "Select options"}
+            placeholder={genresIsFetching ? "LoadingFullPage..." : "Select options"}
           >
             {!genresIsFetching ? (
               genresData?.data.map((g) => (

@@ -13,6 +13,7 @@
   ],
   "references": [
     {
+      "composite": true,
       "path": "./tsconfig.app.json"
     }
   ]

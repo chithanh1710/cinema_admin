@@ -12,6 +12,7 @@ import { Button, Image } from "antd";
 import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { deleteFoodAndDrink } from "../../services/actions.tsx";
+import Loading from "@/components/Shared/Loading";
 
 export default function FoodsAndDrinks() {
 	const queryClient = useQueryClient();
@@ -26,7 +27,7 @@ export default function FoodsAndDrinks() {
 	});
 
 	if (isError) return <p>Error fetching data</p>;
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 
 	const filter = params.get("filter") || "";
 	const q = params.get("q") || "";

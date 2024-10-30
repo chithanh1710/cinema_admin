@@ -1,11 +1,12 @@
-import { Badge, Descriptions, Image } from "antd";
 import type { DescriptionsProps } from "antd";
+import { Badge, Descriptions, Image } from "antd";
 import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getMovieById } from "../../services/api";
 import { format } from "date-fns";
 import { Star } from "lucide-react";
 import { IMG_CONFIG } from "../../constants/img";
+import Loading from "@/components/Shared/Loading";
 
 export default function DetailMovie() {
   const params = useParams();
@@ -121,7 +122,7 @@ export default function DetailMovie() {
   ];
 
   if (!id) return Navigate({ to: "/dashboard/movie", replace: true });
-  if (isFetching) return <p>Loading...</p>;
+  if (isFetching) return <Loading/>;
   if (isError) return <p>Error</p>;
   return (
     <div>

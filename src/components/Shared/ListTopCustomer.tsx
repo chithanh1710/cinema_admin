@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GetTop5CustomersBySpending } from "@/services/api.tsx";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
 import { formatMoney } from "@/utils/MoneyFormat.ts";
+import Loading from "@/components/Shared/Loading";
 
 
 export default function ListTopCustomer() {
@@ -10,7 +11,7 @@ export default function ListTopCustomer() {
 		queryFn: GetTop5CustomersBySpending,
 	});
 	if (isError) return <p>Error fetching data</p>;
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 	const listTop5Customers = data?.data || [];
 	return (
 		<Table>

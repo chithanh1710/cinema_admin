@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { editEmployee } from "../../services/actions"; // Assume you have this service
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getStaffById } from "../../services/api.tsx";
+import Loading from "@/components/Shared/Loading";
 
 export default function FormEditEmployee() {
 	const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function FormEditEmployee() {
 	const employeeData = data?.data[0];
 
 	if (isError) return <p>Error</p>;
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 	if (!id) return <Navigate to="/dashboard/employee" replace/>;
 
 	const onFinish = (values: any) => {

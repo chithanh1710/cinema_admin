@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { editCustomer } from "../../services/actions";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getCustomerById } from "../../services/api.tsx";
+import Loading from "@/components/Shared/Loading";
 
 export default function FormEditCustomer() {
 	const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function FormEditCustomer() {
 	const customerData = data?.data[0];
 
 	if (isError) return <p>Error</p>;
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 	if (!id) return <Navigate to="/dashboard/customer" replace/>;
 
 	const onFinish = (values: any) => {

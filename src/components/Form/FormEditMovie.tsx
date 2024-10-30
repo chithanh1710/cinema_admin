@@ -10,6 +10,7 @@ import { useState } from "react";
 import moment from "moment";
 import TextArea from "antd/es/input/TextArea";
 import { IMG_CONFIG } from "../../constants/img";
+import Loading from "@/components/Shared/Loading";
 
 const normFile = (e: any) => {
 	if (Array.isArray(e)) {
@@ -90,7 +91,7 @@ export default function FormEditMovie() {
 	const movieData = data?.data[0];
 
 	if (!id) return Navigate({ to: "/dashboard/movie", replace: true });
-	if (isFetching) return <p>Loading...</p>;
+	if (isFetching) return <Loading/>;
 	if (genresIsError || actorsIsError || directorsIsError || isError)
 		return <p>Error</p>;
 
@@ -228,7 +229,7 @@ export default function FormEditMovie() {
 						        .includes(input.toLowerCase())
 						: false
 					}
-					placeholder={directorsIsFetching ? "Loading..." : "Select options"}
+					placeholder={directorsIsFetching ? "LoadingFullPage..." : "Select options"}
 				>
 					{!directorsIsFetching ? (
 						directorsData?.data.map((d) => (
@@ -263,7 +264,7 @@ export default function FormEditMovie() {
 						: false
 					}
 					mode="multiple"
-					placeholder={actorsIsFetching ? "Loading..." : "Select options"}
+					placeholder={actorsIsFetching ? "LoadingFullPage..." : "Select options"}
 				>
 					{!actorsIsFetching ? (
 						actorsData?.data.map((a) => (
@@ -298,7 +299,7 @@ export default function FormEditMovie() {
 						: false
 					}
 					mode="multiple"
-					placeholder={genresIsFetching ? "Loading..." : "Select options"}
+					placeholder={genresIsFetching ? "LoadingFullPage..." : "Select options"}
 				>
 					{!genresIsFetching ? (
 						genresData?.data.map((g) => (

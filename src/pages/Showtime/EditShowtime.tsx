@@ -7,6 +7,7 @@ import { editShowtime } from "../../services/actions.tsx";
 import { getAllCinemas, getAllMovie, getAllShowTimes } from "../../services/api.tsx";
 import toast from "react-hot-toast";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import Loading from "@/components/Shared/Loading";
 
 const config = {
 	rules: [{ type: "object" as const, required: true, message: "Please select time!" }],
@@ -133,7 +134,7 @@ export default function EditShowtime() {
 	const listMovie = dataMovie?.data || [];
 	const listScreenRoom = dataScreenRoom || [];
 
-	if (isFetchingMovie || isFetchingScreenRoomAPI || isFetchingShowTimeAPI) return <p>Loading...</p>;
+	if (isFetchingMovie || isFetchingScreenRoomAPI || isFetchingShowTimeAPI) return <Loading/>;
 
 	return (
 		<main>
