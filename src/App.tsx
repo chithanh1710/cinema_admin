@@ -30,7 +30,7 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: (
-			<Suspense fallback={<div>Loading...</div>}> {/* Hiển thị loading khi đang tải */}
+			<Suspense fallback={<div>Loading...</div>}>
 				<Login/>
 			</Suspense>
 		),
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
 	{
 		path: "/dashboard",
 		element: (
-			<Suspense fallback={<div>Loading...</div>}> {/* Hiển thị loading khi đang tải */}
+			<Suspense fallback={<div>Loading...</div>}>
 				<PrivateRoute>
 					<Dashboard/>
 				</PrivateRoute>
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
 			{
 				path: "analysis",
 				element: (
-					<Suspense fallback={<div>Loading...</div>}> {/* Hiển thị loading khi đang tải */}
+					<Suspense fallback={<div>Loading...</div>}>
 						<Analysis/>
 					</Suspense>
 				),
