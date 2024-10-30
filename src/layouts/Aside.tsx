@@ -23,7 +23,7 @@ export default function Aside() {
     },
     {
       icon: <Popcorn className="size-5" />,
-      to: "product-and-service",
+      to: "foods-and-drinks",
       name: "Quản lý sản phẩm",
     },
     {
@@ -38,7 +38,8 @@ export default function Aside() {
     },
   ];
   return (
-    <aside className="flex flex-col gap-2 px-4 py-8 bg-white rounded-tr-2xl rounded-br-2xl shadow my-4">
+      <aside
+          className="flex flex-col gap-2 px-4 py-4 bg-white rounded-tr-2xl rounded-br-2xl shadow">
       {dataAside.map((item) => (
         <NavLink
           key={item.name}

@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Movie from "./pages/Movie/Movie";
 import Showtime from "./pages/Showtime/Showtime.tsx";
-import ProductAndService from "./pages/ProductAndService";
+import FoodsAndDrinks from "./pages/FoodAndDrink/FoodsAndDrinks.tsx";
 import Customer from "./pages/Customer/Customer.tsx";
 import Employee from "./pages/Employee/Employee.tsx";
 import { Toaster } from "react-hot-toast";
@@ -87,12 +87,12 @@ const router = createBrowserRouter([
 				element: <DetailCustomer/>,
 			},
 			{
-				path: "product-and-service",
-				element: <ProductAndService/>,
+				path: "foods-and-drinks",
+				element: <FoodsAndDrinks/>,
 			},
 			{
 				path: "information",
-				element: <ProductAndService/>,
+				element: <FoodsAndDrinks/>,
 			},
 			{
 				path: "problem",

@@ -15,7 +15,7 @@ export default function Customer() {
 	const [filterRank, setFilterRank] = useState<string[]>([]);
 
 	const { data, isFetching, isError } = useQuery({
-		queryKey: ["customer", filterRank, search],
+		queryKey: ["customer"],
 		queryFn: () => getAllCustomer(),
 	});
 
@@ -47,7 +47,8 @@ export default function Customer() {
 	const listCustomerFilter = listCustomer?.filter((customer) =>
 		(filterRank.length === 0 || filterRank.includes(customer.rank)) &&
 		(search ? customer.id.toString()
-		                  .includes(search) : true)
+		                  .includes(search) || customer.name.toLowerCase()
+		                                               .includes(search.toLowerCase()) : true)
 	);
 
 	const columns: TableColumnsType = [
@@ -103,10 +104,10 @@ export default function Customer() {
 		<main>
 			<div className="flex justify-between items-center mb-2 px-4">
 				<div className="w-52">
-					<Search placeholder="Search by ID"/>
+					<Search placeholder="Nhập tên hoặc mã"/>
 				</div>
 				<p className="font-light">
-					Total Customers:{" "}
+					Tổng khách hàng:{" "}
 					<span className="font-bold">
                         {!isFetching ? listCustomerFilter?.length : 0}
                     </span>

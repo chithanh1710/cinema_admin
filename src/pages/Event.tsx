@@ -37,7 +37,6 @@ export default function Event() {
     []
   );
   const [dataTmp, setDataTmp] = useState(data);
-    console.log(setDataTmp);
   return (
     <>
       <section className="flex gap-6 mb-6">

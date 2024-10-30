@@ -36,7 +36,6 @@ export async function addMovie(movie: any) {
 }
 
 export async function editMovie(movie: any, movieId: number) {
-	console.log(movie);
 	if (!movie.image && !movie.thumbnail) {
 		throw new Error("Vui lòng thêm lại 2 ảnh");
 	}
@@ -170,6 +169,77 @@ export async function editEmployee(values: any, id: number) {
 				"ngrok-skip-browser-warning": "true"
 			},
 			body: JSON.stringify(values)
+		});
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to edit customer:", error);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+export async function editFoodAndDrink(values: any, id: number) {
+	try {
+		const res = await fetch(`${URL_API}/foodsdrinks/${id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
+			},
+			body: JSON.stringify(values)
+		});
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to edit customer:", error);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+export async function addFoodAndDrink(values: any) {
+	try {
+		const res = await fetch(`${URL_API}/foodsdrinks`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"ngrok-skip-browser-warning": "true"
+			},
+			body: JSON.stringify(values)
+		});
+		if (!res.ok) {
+			throw new Error(`Error: ${res.status} ${res.statusText}`);
+		}
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error("Failed to edit customer:", error);
+			throw error;
+		} else {
+			console.error("Unknown error occurred");
+			throw new Error("An unknown error occurred");
+		}
+	}
+}
+
+
+export async function deleteFoodAndDrink(id: number) {
+	try {
+		const res = await fetch(`${URL_API}/foodsdrinks/${id}`, {
+			method: "DELETE",
+			headers: {
+				"ngrok-skip-browser-warning": "true"
+			},
 		});
 		if (!res.ok) {
 			throw new Error(`Error: ${res.status} ${res.statusText}`);
