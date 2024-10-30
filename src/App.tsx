@@ -1,106 +1,185 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Movie from "./pages/Movie/Movie";
-import Showtime from "./pages/Showtime/Showtime.tsx";
-import FoodsAndDrinks from "./pages/FoodAndDrink/FoodsAndDrinks.tsx";
-import Customer from "./pages/Customer/Customer.tsx";
-import Employee from "./pages/Employee/Employee.tsx";
+import { lazy, Suspense } from "react"; // Nhập lazy và Suspense
 import { Toaster } from "react-hot-toast";
-import Problem from "./pages/Problem";
-import Event from "./pages/Event";
-import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { LoginProvider } from "./contexts/LoginContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import AddMovie from "./pages/Movie/AddMovie";
-import EditMovie from "./pages/Movie/EditMovie";
-import DetailMovie from "./pages/Movie/DetailMovie";
-import AddShowtime from "./pages/Showtime/AddShowtime.tsx";
-import EditShowtime from "./pages/Showtime/EditShowtime.tsx";
-import EditCustomer from "./pages/Customer/EditCustomer.tsx";
-import DetailCustomer from "./pages/Customer/DetailCustomer.tsx";
-import EditEmployee from "./pages/Employee/EditEmployee.tsx";
-import Analysis from "./pages/Analysis.tsx";
+
+// Sử dụng React.lazy để tải các component
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Movie = lazy(() => import("./pages/Movie/Movie"));
+const Showtime = lazy(() => import("./pages/Showtime/Showtime.tsx"));
+const FoodsAndDrinks = lazy(() => import("./pages/FoodAndDrink/FoodsAndDrinks.tsx"));
+const Customer = lazy(() => import("./pages/Customer/Customer.tsx"));
+const Employee = lazy(() => import("./pages/Employee/Employee.tsx"));
+const Problem = lazy(() => import("./pages/Problem"));
+const Event = lazy(() => import("./pages/Event"));
+const Login = lazy(() => import("./pages/Login"));
+const AddMovie = lazy(() => import("./pages/Movie/AddMovie"));
+const EditMovie = lazy(() => import("./pages/Movie/EditMovie"));
+const DetailMovie = lazy(() => import("./pages/Movie/DetailMovie"));
+const AddShowtime = lazy(() => import("./pages/Showtime/AddShowtime.tsx"));
+const EditShowtime = lazy(() => import("./pages/Showtime/EditShowtime.tsx"));
+const EditCustomer = lazy(() => import("./pages/Customer/EditCustomer.tsx"));
+const DetailCustomer = lazy(() => import("./pages/Customer/DetailCustomer.tsx"));
+const EditEmployee = lazy(() => import("./pages/Employee/EditEmployee.tsx"));
+const Analysis = lazy(() => import("./pages/Analysis.tsx"));
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Login/>,
+		element: (
+			<Suspense fallback={<div>Loading...</div>}> {/* Hiển thị loading khi đang tải */}
+				<Login/>
+			</Suspense>
+		),
 	},
 	{
 		path: "/dashboard",
 		element: (
-			<PrivateRoute>
-				<Dashboard/>
-			</PrivateRoute>
+			<Suspense fallback={<div>Loading...</div>}> {/* Hiển thị loading khi đang tải */}
+				<PrivateRoute>
+					<Dashboard/>
+				</PrivateRoute>
+			</Suspense>
 		),
 		children: [
 			{
 				path: "analysis",
-				element: <Analysis/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}> {/* Hiển thị loading khi đang tải */}
+						<Analysis/>
+					</Suspense>
+				),
 			},
 			{
 				path: "movie",
-				element: <Movie/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<Movie/>
+					</Suspense>
+				),
 			},
 			{
 				path: "movie/add",
-				element: <AddMovie/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<AddMovie/>
+					</Suspense>
+				),
 			},
 			{
 				path: "movie/edit/:id",
-				element: <EditMovie/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<EditMovie/>
+					</Suspense>
+				),
 			},
 			{
 				path: "movie/detail/:id",
-				element: <DetailMovie/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<DetailMovie/>
+					</Suspense>
+				),
 			},
 			{
 				path: "showtime",
-				element: <Showtime/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<Showtime/>
+					</Suspense>
+				),
 			},
 			{
 				path: "showtime/edit/:id",
-				element: <EditShowtime/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<EditShowtime/>
+					</Suspense>
+				),
 			},
 			{
 				path: "showtime/add",
-				element: <AddShowtime/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<AddShowtime/>
+					</Suspense>
+				),
 			},
 			{
 				path: "employee",
-				element: <Employee/>,
-			}, {
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<Employee/>
+					</Suspense>
+				),
+			},
+			{
 				path: "employee/edit/:id",
-				element: <EditEmployee/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<EditEmployee/>
+					</Suspense>
+				),
 			},
 			{
 				path: "customer",
-				element: <Customer/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<Customer/>
+					</Suspense>
+				),
 			},
 			{
 				path: "customer/edit/:id",
-				element: <EditCustomer/>,
-			}, {
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<EditCustomer/>
+					</Suspense>
+				),
+			},
+			{
 				path: "customer/detail/:id",
-				element: <DetailCustomer/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<DetailCustomer/>
+					</Suspense>
+				),
 			},
 			{
 				path: "foods-and-drinks",
-				element: <FoodsAndDrinks/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<FoodsAndDrinks/>
+					</Suspense>
+				),
 			},
 			{
 				path: "information",
-				element: <FoodsAndDrinks/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<FoodsAndDrinks/>
+					</Suspense>
+				),
 			},
 			{
 				path: "problem",
-				element: <Problem/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<Problem/>
+					</Suspense>
+				),
 			},
 			{
 				path: "event",
-				element: <Event/>,
+				element: (
+					<Suspense fallback={<div>Loading...</div>}>
+						<Event/>
+					</Suspense>
+				),
 			},
 		],
 	},
