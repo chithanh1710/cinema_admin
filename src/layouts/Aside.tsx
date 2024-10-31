@@ -1,6 +1,6 @@
-import { ArrowLeftToLine, CalendarClock, CircleUserRound, Film, HomeIcon, Popcorn, ServerCrash, Ticket, UserRound, UsersRound, } from "lucide-react";
+import { ArrowLeftToLine, CalendarClock, Film, HomeIcon, Popcorn, UsersRound, } from "lucide-react";
 import { ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Aside() {
   const dataAside: { icon: ReactNode; to: string; name: string }[] = [
@@ -11,11 +11,11 @@ export default function Aside() {
       to: "showtime",
       name: "Quản lý suất chiếu",
     },
-    {
-      icon: <UserRound className="size-5" />,
-      to: "employee",
-      name: "Quản lý nhân viên",
-    },
+    // {
+    //   icon: <UserRound className="size-5" />,
+    //   to: "employee",
+    //   name: "Quản lý nhân viên",
+    // },
     {
       icon: <UsersRound className="size-5" />,
       to: "customer",
@@ -26,16 +26,16 @@ export default function Aside() {
       to: "foods-and-drinks",
       name: "Quản lý sản phẩm",
     },
-    {
-      icon: <Ticket className="size-5" />,
-      to: "event",
-      name: "Sự kiện khuyến mãi",
-    },
-    {
-      icon: <ServerCrash className="size-5" />,
-      to: "problem",
-      name: "Sự cố",
-    },
+    // {
+    //   icon: <Ticket className="size-5" />,
+    //   to: "event",
+    //   name: "Sự kiện khuyến mãi",
+    // },
+    // {
+    //   icon: <ServerCrash className="size-5" />,
+    //   to: "problem",
+    //   name: "Sự cố",
+    // },
   ];
   return (
       <aside
@@ -57,15 +57,15 @@ export default function Aside() {
         </NavLink>
       ))}
       <div className="flex flex-col gap-2 mt-auto">
-        <Link
-          to="information"
-          className="hover:bg-blue-500 hover:text-white py-3 px-3 rounded-md transition-all bg-blue-400 text-blue-50"
-        >
-          <p className="flex gap-3 items-center font-medium">
-            <CircleUserRound className="size-5" />
-            <span>Cá nhân</span>
-          </p>
-        </Link>
+        {/*<Link*/}
+        {/*  to="information"*/}
+        {/*  className="hover:bg-blue-500 hover:text-white py-3 px-3 rounded-md transition-all bg-blue-400 text-blue-50"*/}
+        {/*>*/}
+        {/*  <p className="flex gap-3 items-center font-medium">*/}
+        {/*    <CircleUserRound className="size-5" />*/}
+        {/*    <span>Cá nhân</span>*/}
+        {/*  </p>*/}
+        {/*</Link>*/}
         <button
           onClick={(e) => {
             e.preventDefault();
