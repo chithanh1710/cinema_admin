@@ -1,10 +1,22 @@
-import { ArrowLeftToLine, CalendarClock, Film, HomeIcon, Popcorn, UsersRound, } from "lucide-react";
+import {
+  ArchiveRestore,
+  ArrowLeftToLine,
+  CalendarClock,
+  Film,
+  HomeIcon,
+  Popcorn,
+  UsersRound,
+} from "lucide-react";
 import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function Aside() {
   const dataAside: { icon: ReactNode; to: string; name: string }[] = [
-    { icon: <HomeIcon className="size-5"/>, to: "analysis", name: "Trang chủ" },
+    {
+      icon: <HomeIcon className="size-5" />,
+      to: "analysis",
+      name: "Trang chủ",
+    },
     { icon: <Film className="size-5" />, to: "movie", name: "Quản lý phim" },
     {
       icon: <CalendarClock className="size-5" />,
@@ -26,6 +38,11 @@ export default function Aside() {
       to: "foods-and-drinks",
       name: "Quản lý sản phẩm",
     },
+    {
+      icon: <ArchiveRestore />,
+      to: "backup",
+      name: "Sao lưu và phục hồi",
+    },
     // {
     //   icon: <Ticket className="size-5" />,
     //   to: "event",
@@ -38,8 +55,7 @@ export default function Aside() {
     // },
   ];
   return (
-      <aside
-          className="flex flex-col gap-2 px-4 py-4 bg-white rounded-tr-2xl rounded-br-2xl shadow">
+    <aside className="flex flex-col gap-2 px-4 py-4 bg-white rounded-tr-2xl rounded-br-2xl shadow">
       {dataAside.map((item) => (
         <NavLink
           key={item.name}
