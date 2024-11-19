@@ -254,7 +254,7 @@ export async function deleteFoodAndDrink(id: number) {
   }
 }
 
-export async function createRestore(fileName: string) {
+export async function createBackup(fileName: string) {
   try {
     const res = await fetch(`${URL_API}/backup`, {
       method: "POST",
@@ -270,6 +270,30 @@ export async function createRestore(fileName: string) {
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Failed to edit customer:", error);
+      throw error;
+    } else {
+      console.error("Unknown error occurred");
+      throw new Error("An unknown error occurred");
+    }
+  }
+}
+
+export async function restoreBackup(fileName: string) {
+  try {
+    const res = await fetch(`${URL_API}/backup/restore`, {
+      method: "POST",
+      body: JSON.stringify({ RestoreFileName: fileName.replace(".bak", "") }),
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true",
+      },
+    });
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status} ${res.statusText}`);
+    }
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Failed to restore backup:", error);
       throw error;
     } else {
       console.error("Unknown error occurred");

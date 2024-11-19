@@ -39,7 +39,7 @@ export default function Aside() {
       name: "Quản lý sản phẩm",
     },
     {
-      icon: <ArchiveRestore />,
+      icon: <ArchiveRestore className="size-5" />,
       to: "backup",
       name: "Sao lưu và phục hồi",
     },
