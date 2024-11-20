@@ -38,8 +38,8 @@ export default function FoodsAndDrinks() {
         (filter ? (filter === "Tất cả" ? true : d.category === filter) : true)
     ) || [];
   return (
-    <>
-      <section className="flex gap-6 mb-6 px-4">
+    <div className="px-4">
+      <section className="flex gap-6 mb-6">
         <Filter name="Loại">
           <option>Tất cả</option>
           <option>Đồ ăn</option>
@@ -137,6 +137,6 @@ export default function FoodsAndDrinks() {
           <ShowAddOrEditProduct id={id} setIsClick={setIsClickEdit} />
         </Show>
       )}
-    </>
+    </div>
   );
 }
