@@ -45,7 +45,7 @@ export default function Restore() {
   ];
   let i = 0;
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 px-4">
       <div className="flex gap-4 h-[360px]">
         <CardBackup />
         <CardRestore />
