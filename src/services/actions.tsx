@@ -55,6 +55,8 @@ export async function editMovie(movie: any, movieId: number) {
       },
       body: JSON.stringify(movie),
     });
+    console.log(res);
+
     if (!res.ok) {
       throw new Error(`Error: ${res.status} ${res.statusText}`);
     }
